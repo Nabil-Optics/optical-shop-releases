@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nabil Optics — Live Download & Update Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --surface: #131b33;
+      --surface2: #192342;
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #4f6ef7;
+      --primary-hover: #3b5bdb;
+      --success: #10b981;
+      --warning: #f59e0b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #1d2b53 0%, var(--bg) 65%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 1020px; margin: 0 auto; padding: 32px 20px 64px; }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 28px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 12px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; letter-spacing: -0.3px; }
+    .brand-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: linear-gradient(135deg, #4361ee, #7c3aed);
+      display: flex; align-items: center; justify-content: center; font-size: 20px;
+    }
+    .live-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
+      background: rgba(16, 185, 129, 0.14); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 8px var(--success); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .hero {
+      margin-top: 40px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px; text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+    .version-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 999px;
+      background: rgba(79, 110, 247, 0.18); color: #93b4ff; font-size: 13px; font-weight: 600; margin-bottom: 14px;
+    }
+    .hero h1 { font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px; }
+    .hero p { color: var(--muted); max-width: 640px; margin: 0 auto 28px; font-size: 16px; }
+
+    .dl-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--primary); color: #fff; text-decoration: none;
+      padding: 16px 32px; border-radius: 12px; font-size: 16px; font-weight: 700;
+      transition: transform 0.15s, background 0.15s; box-shadow: 0 8px 24px rgba(79, 110, 247, 0.4);
+    }
+    .dl-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .meta-row {
+      margin-top: 16px; font-size: 13px; color: var(--muted);
+      display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;
+    }
+
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 20px; margin-top: 28px;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px;
+    }
+    .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .card p, .card li { color: var(--muted); font-size: 14px; }
+    .card ol, .card ul { padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+    .changelog {
+      background: var(--surface2); border-radius: 10px; padding: 14px;
+      font-family: Consolas, monospace; font-size: 13px; color: #cbd5e1;
+      white-space: pre-wrap; max-height: 200px; overflow-y: auto; margin-top: 8px;
+    }
+    .note-box {
+      margin-top: 24px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 12px; padding: 16px 20px; font-size: 13.5px; color: #fcd34d;
+    }
+    footer {
+      margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+      color: var(--muted); font-size: 13px;
+    }
+    footer b { color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="brand-icon">👓</div>
+        <div>
+          <div>Nabil Optics</div>
+          <div style="font-size:12px;font-weight:500;color:var(--muted)">Desktop POS &amp; Sync Portal</div>
+        </div>
+      </div>
+      <div class="live-pill">
+        <span class="dot"></span>
+        <span id="live-status">Live Portal · Auto-Update Enabled</span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="version-badge" id="rel-version">Checking latest release…</div>
+      <h1>Optical Shop Desktop App</h1>
+      <p>Offline-first billing, inventory, prescription power records, thermal receipt printing, and automatic multi-computer Google Drive synchronization.</p>
+      <a class="dl-btn" id="dl-link" href="https://github.com/Nabil-Optics/optical-shop-releases/releases/latest" target="_blank" rel="noopener">
+        <span>⬇ Download Installer for Windows (.exe)</span>
+      </a>
+      <div class="meta-row">
+        <span id="rel-date">Windows 10 / 11 (64-bit)</span>
+        <span>•</span>
+        <span id="rel-size">Auto-updates in background</span>
+        <span>•</span>
+        <a href="https://github.com/Nabil-Optics/optical-shop-releases/releases" target="_blank" rel="noopener" style="color:#93b4ff;text-decoration:none">All releases ↗</a>
+      </div>
+    </section>
+
+    <div class="note-box">
+      <b>First-time Windows install note:</b> If Windows SmartScreen shows <i>"Windows protected your PC"</i>, click <b>More info</b> → <b>Run anyway</b>. Once installed, future updates download and install automatically inside the app.
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🚀 How Setup &amp; Multi-PC Sync Work</h3>
+        <ol>
+          <li><b>First Computer (New Shop):</b> Open the app, click <b>Sign in with Shop Gmail</b> (required first), then set your <b>Shop Passphrase</b> and Counter name (e.g. <i>Counter 1</i>).</li>
+          <li><b>Second / Additional PCs:</b> Click <b>Join an existing shop</b> and sign in with the <b>same Shop Gmail</b> (or enter the Shop Passphrase + Connect Code). All items, customers, and invoices sync automatically!</li>
+          <li><b>Automatic Updates:</b> Whenever a new version is published to the server, installed PCs automatically download it in the background and show <i>"Update ready"</i> in the top bar.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3>📋 Latest Release Notes</h3>
+        <p>This portal automatically reflects the latest version published on GitHub Releases:</p>
+        <div class="changelog" id="rel-notes">Loading latest release details from server…</div>
+      </div>
+    </div>
+
+    <footer>
+      <div>© Nabil Optics · Offline-First Desktop POS</div>
+      <div>Software by <b>Hasib Shahriyar</b></div>
+    </footer>
+  </div>
+
+  <script>
+    const REPO = 'Nabil-Optics/optical-shop-releases';
+    async function checkRelease() {
+      try {
+        const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`, { headers: { 'Accept': 'application/vnd.github+json' } });
+        if (!res.ok) throw new Error('No release published yet');
+        const data = await res.json();
+        const exe = (data.assets || []).find(a => a.name.endsWith('.exe'));
+        document.getElementById('rel-version').textContent = `Latest Version: ${data.tag_name || data.name}`;
+        if (data.published_at) {
+          document.getElementById('rel-date').textContent = `Published: ${new Date(data.published_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}`;
+        }
+        if (exe) {
+          document.getElementById('dl-link').href = exe.browser_download_url;
+          const mb = (exe.size / (1024 * 1024)).toFixed(1);
+          document.getElementById('rel-size').textContent = `Installer size: ${mb} MB`;
+        } else {
+          document.getElementById('dl-link').href = data.html_url;
+        }
+        document.getElementById('rel-notes').textContent = (data.body || 'Production installer build with automatic updates and Gmail + Passphrase sync.').trim();
+        document.getElementById('live-status').textContent = `Live · ${data.tag_name} Available`;
+      } catch {
+        document.getElementById('rel-version').textContent = 'Version v1.0.0 · Ready';
+        document.getElementById('rel-notes').textContent = [
+          '• Compulsory Gmail sign-in on first setup linked with Shop Passphrase',
+          '• Join additional PCs via Shop Gmail (1-click) or Passphrase + Connect Code',
+          '• 80 mm & 58 mm thermal receipts with Counter name & developer signature',
+          '• Offline-first billing, stock movements, prescriptions, dues, and Excel reports',
+          '• Automatic background updates via GitHub Releases'
+        ].join('\n');
+      }
+    }
+    checkRelease();
+    setInterval(checkRelease, 60000);
+  </script>
+</body>
+</html>
+
